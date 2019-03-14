@@ -94,10 +94,10 @@
                             <td>${questions.count}</td>
                             <td>
                                 <p>编辑
-                                <a href="/admin/qes_body/action/${questions.pk}" class="btn btn-xs btn-primary"> <i
+                                <a href="admin/qes_body/action/${questions.pk}" class="btn btn-xs btn-primary"> <i
                                         class="glyphicon glyphicon-edit"></i> </a></p>
                                 <p>删除
-                                <a href="admin/qes_body/delete/${questions.pk}" class="btn btn-xs btn-danger btn-delete" > <i
+                                <a href="admin/delete/${questions.pk}" class="btn btn-xs btn-danger btn-delete" > <i
                                         class="glyphicon glyphicon-remove"></i> </a></p>
                             </td>
                         </tr>
@@ -110,7 +110,7 @@
                 <form class="form-inline" hidden id="name_box">
                               <div class="form-group">
                                 <label for="exampleInputName2">题目名称</label>
-                                <input type="text" class="form-control" id="new_query_name" placeholder="Jane Doe">
+                                <input type="text" class="form-control" id="new_query_name" placeholder="请输入">
                               </div>
                               <button id= "btn_add_confirm" type="button" class="btn btn-default">确认</button>
                 </form>
@@ -127,12 +127,12 @@
         $(function () {
              $("#btn_add_confirm").on('click',function () {
                var new_query_name = {new_name:$("#new_query_name").val()}
-               var url = site_url+'admin/query/add/'
+               var url = site_url+'developer/admin/query/add/'
                  if(confirm("确认创建测评？")){
                     $.post(url,new_query_name,function (res) {
                     alert(res.message)
                     if(res.result){
-                        window.location=site_url
+                        window.location=site_url+'developer'
                     }
                 })
                  }
@@ -140,6 +140,21 @@
 
             })
 
+        })
+        $(function () {
+            $("#qes_body").on('click','.btn-delete',function (e) {
+                e.preventDefault()
+                if(confirm("确认删除？")){
+                    var url=$(this).attr('href')
+                    $.get(url,function (res) {
+                        alert(res.message)
+                        if(res.result){
+                            location.reload()
+                        }
+                    })
+
+                }
+            })
         })
     </script>
 </body>

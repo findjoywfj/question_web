@@ -64,13 +64,16 @@
              <label><input type="radio" value=0 name=${question.name} class="qes">${question.item_2}</label>
 
                 <br>
-              <a href="/admin/qes_body/edit/${question.pk}" class="btn btn-xs btn-primary">编辑 <i
+              <a href="/developer/admin/qes_body/edit/${question.pk}" class="btn btn-xs btn-primary">编辑 <i
                                         class="glyphicon glyphicon-edit"></i> </a>
-             <a  href="/admin/delete/item/${question.pk}"  class="btn btn-xs btn-danger btn-delete" > <i
+             <a  href="/developer/admin/delete/item/${question.pk}"  class="btn btn-xs btn-danger btn-delete" > <i
                                class="glyphicon glyphicon-remove"></i> 删除</a>
              % endfor
-             <a href="/admin/qes_body/add/${query_id}" class ="btn btn-lg btn-add  btn-block"><i
+             <a href="/developer/admin/qes_body/add/${query_id}" class ="btn btn-lg btn-add  btn-block"><i
                 class="glyphicon glyphicon-plus"></i>新增</a>
+             <hr />
+              <a href="/developer/qes_body/result_edit/${query_id}" class ="btn btn-lg   btn-block"><i
+                class="glyphicon glyphicon-plus"></i>编辑结果</a>
         </div>
 
 
@@ -97,12 +100,12 @@
             $(function () {
                 $("#button_confirm").on('click',function () {
                     var param = {rename:$("#qes_name").val()}
-                    var url = site_url+'admin/query/rename/'+$(this).attr("query_id")+'/'
+                    var url = site_url+'developer/admin/query/rename/'+$(this).attr("query_id")+'/'
                     if(confirm('确认修改？')){
                         $.post(url,param,function (res) {
                         alert(res.message)
                         if(res.result){
-                            window.location=site_url
+                            window.location=site_url+'developer'
                             }
                         })
                     }

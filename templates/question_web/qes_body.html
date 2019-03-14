@@ -11,6 +11,12 @@
     <link href="https://o.qcloud.com/static_api/v3/bk/css/bk.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/vue" ></script>
     <script>var i = 1</script>
+    <style type="text/css">
+        #question_body{
+            left: 50%;
+            position: absolute;
+        }
+    </style>
 </head>
 <body>
 
@@ -64,13 +70,14 @@
 
                 <br>
              % endfor
-        </div>
-        <div class="form-group clearfix">
+               <div class="form-group clearfix">
                         <div class="col-sm-9 col-sm-offset-3">
                             <a id="btn-submit" num="${num}" type="button" class="king-btn mr10  king-success">完成</a>
                             <a type="button" class="king-btn king-default" href="${SITE_URL}">返回</a>
                         </div>
         </div>
+        </div>
+
 
         <script>
             $(function () {
@@ -91,9 +98,10 @@
                     }
                     if(count<(num/2))
                         alert("未完成题目")
-                    else
-                        alert("得分为"+result)
-
+                    else {
+                        var url = 'result/' + result
+                        window.location = url
+                    }
                 })
 
             })

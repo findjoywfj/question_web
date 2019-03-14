@@ -104,16 +104,16 @@
                 var qes_Param = get_param()
                 var url = site_url
                 if(opt == 'add') {
-                    url += 'admin/qes_body/add/' + query_id + '/'
+                    url += 'developer/admin/qes_body/add/' + query_id + '/'
                 }
                 else if(opt == 'edit'){
                      var item_id = $(this).attr('item_id')
-                     url += 'admin/qes_body/edit/'+item_id+'/'
+                     url += 'developer/admin/qes_body/edit/'+item_id+'/'
                 }
                 $.post(url, qes_Param,function (res) {
                     alert(res.message);
                     if(res.result){
-                        window.location = site_url+'admin/qes_body/action/'+query_id+'/'
+                        window.location = site_url+'developer/admin/qes_body/action/'+query_id+'/'
                     }
 
                 },'json')
@@ -121,7 +121,7 @@
 
             $("#btn_cancel").on('click',function (e) {
                  var query_id = document.getElementById("query_id").firstChild.nodeValue
-                 window.location = site_url+'admin/qes_body/action/'+query_id+'/'
+                 window.location = site_url+'developer/admin/qes_body/action/'+query_id+'/'
 
             })
         })

@@ -1,0 +1,1 @@
+from django.conf.urls import urlfrom customer.views import qes_show,home,qes_resulturlpatterns = [    url(r'^$', home),    url(r'^qes_body/(?P<query_id>\d+)/$', qes_show),    url(r'^qes_body/(?P<query_id>\d+)/result/(?P<score>\d+)/', qes_result)]

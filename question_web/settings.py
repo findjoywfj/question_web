@@ -43,7 +43,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'developer'
+    'developer',
+    'customer',
+    'login',
 
 ]
 
@@ -137,7 +139,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
-
 TEMPLATE_CONTEXT_PROCESSORS = (
     # the context to the templates
     'django.contrib.auth.context_processors.auth',
