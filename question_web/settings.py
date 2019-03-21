@@ -26,7 +26,7 @@ SECRET_KEY = '%fm9j+cz!tov#)eu3!!l0uyxpce6!nntq$2)-oir13+-0y(7j6'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 APP_CODE = 'question_web'
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 PROJECT_ROOT = BASE_DIR
 PROJECT_DIR, PROJECT_MODULE_NAME = os.path.split(PROJECT_ROOT)
 PYTHON_BIN = os.path.dirname(sys.executable)
@@ -139,6 +139,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'all_static') # 所有的静态文静聚合的目录,用python manage.py collectstatic 会把所有的static文件都复制到STATIC_ROOT文件夹下
 TEMPLATE_CONTEXT_PROCESSORS = (
     # the context to the templates
     'django.contrib.auth.context_processors.auth',

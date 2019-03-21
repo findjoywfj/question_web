@@ -1,76 +1,11 @@
- <!DOCTYPE html>
-<html lang="en">
-<head>
-   <meta charset="UTF-8">
-    <title>Title</title>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Bootstrap css -->
-    <link href="https://o.qcloud.com/static_api/v3/assets/bootstrap-3.3.4/css/bootstrap.min.css" rel="stylesheet">
-    <!-- kendo ui css -->
-    <link href="https://o.qcloud.com/static_api/v3/assets/kendoui-2015.2.624/styles/kendo.common.min.css"
-          rel="stylesheet">
-    <link href="https://o.qcloud.com/static_api/v3/assets/kendoui-2015.2.624/styles/kendo.default.min.css"
-          rel="stylesheet">
-    <!-- font-awesome -->
-    <link href="https://o.qcloud.com/static_api/v3/assets/fontawesome/css/font-awesome.css" rel="stylesheet">
-    <!--蓝鲸提供的公用样式库 -->
-    <link href="https://o.qcloud.com/static_api/v3/bk/css/bk.css" rel="stylesheet">
-    <link href="https://o.qcloud.com/static_api/v3/bk/css/bk_pack.css" rel="stylesheet">
-    <!-- 如果要使用Bootstrap的js插件，必须先调入jQuery -->
-    <script src="https://o.qcloud.com/static_api/v3/assets/js/jquery-1.10.2.min.js"></script>
-    <!-- 包括所有bootstrap的js插件或者可以根据需要使用的js插件调用　-->
-    <script src="https://o.qcloud.com/static_api/v3/assets/echarts-2.0/echarts-all.js"></script>
-    <script src="https://o.qcloud.com/static_api/v3/assets/bootstrap-3.3.4/js/bootstrap.min.js"></script>
-    <!-- 包括所有kendoui的js插件或者可以根据需要使用的js插件调用　-->
-    <script src="https://o.qcloud.com/static_api/v3/assets/kendoui-2015.2.624/js/kendo.all.min.js"></script>
-    <script src="https://o.qcloud.com/static_api/v3/assets/echarts-2.0/echarts-all.js"></script>
-    <script src="https://o.qcloud.com/static_api/v3/bk/js/bk.js"></script>
-    <!-- 数据埋点统计 -->
-    <script src="https://o.qcloud.com/static_api/analysis.js"></script>
-    <!--bootstrap css-->
-    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-	<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
-	<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <link href="https://o.qcloud.com/static_api/v3/assets/bootstrap-3.3.4/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://o.qcloud.com/static_api/v3/bk/css/bk.css" rel="stylesheet">
-    <!---script src="${STATIC_URL}js/csrftoken.js?v=${STATIC_VERSION}"></script--->
-    <script>var i =1</script>
-     <script type="text/javascript">
-
-        var site_url = "/";            // app的url前缀,在ajax调用的时候，应该加上该前
-    </script>
-</head>
-<body>
- <nav class="navbar navbar-default king-horizontal-nav2" role="navigation">
-        <div class="container" style="width:100%;">
-            <div class="navbar-header">
-                <p>心理测评 </p>
-            </div>
-            <div class="collapse navbar-collapse navbar-responsive-collapse" id="king-example-navbar-collapse-2">
-                <ul class="nav navbar-nav"  >
-                    <li class="king-navbar-active">
-                        <a href="javascript:;">
-                            <span>首页</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="javascript:;">
-                            <span>数据统计</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="javascript:;">
-                            <span>单据报表</span>
-                        </a>
-                    </li>
-                </ul>
-
-            </div>
-        </div>
-    </nav>
+<!--这是开发者选择编辑哪个题库页面-->
+<%inherit file="/base.html"/>
+    <%block name = "head_js">
+        <script>var i = 1</script>
+    </%block>
+ <%block name = "content">
       <div class="panel panel-default mb0 mt15">
-            <div class="panel-heading">开始测评</div>
+            <div class="panel-heading">开始编辑</div>
             <div class="panel-body">
                 <table class="table mb0 pr15 ranger-box2  ">
                     <thead>
@@ -94,11 +29,11 @@
                             <td>${questions.count}</td>
                             <td>
                                 <p>编辑
-                                <a href="admin/qes_body/action/${questions.pk}" class="btn btn-xs btn-primary"> <i
-                                        class="glyphicon glyphicon-edit"></i> </a></p>
+                                <a href="admin/qes_body/action/${questions.pk}" class="btn btn-xs btn-primary"> <span
+                                        class="glyphicon glyphicon-pencil"></span> </a></p>
                                 <p>删除
-                                <a href="admin/delete/${questions.pk}" class="btn btn-xs btn-danger btn-delete" > <i
-                                        class="glyphicon glyphicon-remove"></i> </a></p>
+                                <a href="admin/delete/${questions.pk}" class="btn btn-xs btn-danger btn-delete" > <span
+                                        class="glyphicon glyphicon-remove"></span> </a></p>
                             </td>
                         </tr>
 
@@ -116,6 +51,12 @@
                 </form>
             </div>
     </div>
+
+ </%block>
+
+ <%block name = "js">
+    <script src="${STATIC_URL}js/jquery-3.1.1.min.js"></script>
+    <script src="${STATIC_URL}js/bootstrap.min.js"></script>
     <script>
         $(function () {
             $("#btn_add").on('click',function () {
@@ -157,6 +98,5 @@
             })
         })
     </script>
-</body>
-</html>
+ </%block>
 

@@ -1,22 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>INSPINIA | Login</title>
-
-    <link href="${STATIC_URL}css/bootstrap.min.css" rel="stylesheet">
-    <link href="${STATIC_URL}font-awesome/css/font-awesome.css" rel="stylesheet">
-
-    <link href="${STATIC_URL}css/animate.css" rel="stylesheet">
-    <link href="${STATIC_URL}css/style.css" rel="stylesheet">
-    <script type="text/javascript">
-
-        var site_url = "/";            // app的url前缀,在ajax调用的时候，应该加上该前
-    </script>
-</head>
-<body>
+<%inherit file="/base.html"/>
+<%block name = "content">
     <div class="ibox-content">
                             <form   class="form-horizontal">
                                 <div class="form-group"><label class="col-sm-2 control-label">结果1</label>
@@ -53,6 +36,9 @@
                                 </div>
                             </form>
     </div>
+</%block>
+
+<%block name = "js">
     <script src="${STATIC_URL}js/jquery-3.1.1.min.js"></script>
     <script src="${STATIC_URL}js/bootstrap.min.js"></script>
     <script>
@@ -79,6 +65,4 @@
         })
 
     </script>
-
-</body>
-</html>
+</%block>

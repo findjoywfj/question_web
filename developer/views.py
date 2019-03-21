@@ -219,8 +219,8 @@ def admin_result_edit(request, query_id):
         result.level_2 = request.POST["level_2"]
         result.save()
         return JsonResponse({
-            'result':True,
-            'message':u"编辑成功"
+            'result': True,
+            'message': u"编辑成功"
         })
     except Exception as e:
         return JsonResponse({

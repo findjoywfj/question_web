@@ -1,45 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-   <meta charset="UTF-8">
-    <title>Title</title>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Bootstrap css -->
-    <link href="https://o.qcloud.com/static_api/v3/assets/bootstrap-3.3.4/css/bootstrap.min.css" rel="stylesheet">
-    <!-- kendo ui css -->
-    <link href="https://o.qcloud.com/static_api/v3/assets/kendoui-2015.2.624/styles/kendo.common.min.css"
-          rel="stylesheet">
-    <link href="https://o.qcloud.com/static_api/v3/assets/kendoui-2015.2.624/styles/kendo.default.min.css"
-          rel="stylesheet">
-    <!-- font-awesome -->
-    <link href="https://o.qcloud.com/static_api/v3/assets/fontawesome/css/font-awesome.css" rel="stylesheet">
-    <!--蓝鲸提供的公用样式库 -->
-    <link href="https://o.qcloud.com/static_api/v3/bk/css/bk.css" rel="stylesheet">
-    <link href="https://o.qcloud.com/static_api/v3/bk/css/bk_pack.css" rel="stylesheet">
-    <!-- 如果要使用Bootstrap的js插件，必须先调入jQuery -->
-    <script src="https://o.qcloud.com/static_api/v3/assets/js/jquery-1.10.2.min.js"></script>
-    <!-- 包括所有bootstrap的js插件或者可以根据需要使用的js插件调用　-->
-    <script src="https://o.qcloud.com/static_api/v3/assets/echarts-2.0/echarts-all.js"></script>
-    <script src="https://o.qcloud.com/static_api/v3/assets/bootstrap-3.3.4/js/bootstrap.min.js"></script>
-    <!-- 包括所有kendoui的js插件或者可以根据需要使用的js插件调用　-->
-    <script src="https://o.qcloud.com/static_api/v3/assets/kendoui-2015.2.624/js/kendo.all.min.js"></script>
-    <script src="https://o.qcloud.com/static_api/v3/assets/echarts-2.0/echarts-all.js"></script>
-    <script src="https://o.qcloud.com/static_api/v3/bk/js/bk.js"></script>
-    <!-- 数据埋点统计 -->
-    <script src="https://o.qcloud.com/static_api/analysis.js"></script>
-    <!--bootstrap css-->
-    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-	<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
-	<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <link href="https://o.qcloud.com/static_api/v3/assets/bootstrap-3.3.4/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://o.qcloud.com/static_api/v3/bk/css/bk.css" rel="stylesheet">
-</head>
-<body>
+<%inherit file="/base.html"/>
+<%block name = "content">
     <h1>${name}</h1>
     <h2>测试结果</h2>
     <p>${result}</p>
     <button type="button" class="btn btn-info" id = "back" >再次测试</button>
+</%block>
+<%block name = "js">
+    <script src="${STATIC_URL}js/jquery-3.1.1.min.js"></script>
+    <script src="${STATIC_URL}js/bootstrap.min.js"></script>
     <script>
         $("#back").click(function () {
             var url = "/customer/qes_body/"
@@ -47,6 +15,6 @@
             window.location=url
         })
     </script>
-</body>
+</%block>
 
-</html>
+
