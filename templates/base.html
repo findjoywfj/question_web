@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+    <link href="${STATIC_URL}css/bootstrap.min.css" rel="stylesheet">
+    <link href="${STATIC_URL}font-awesome/css/font-awesome.css" rel="stylesheet">
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="${STATIC_URL}css/animate.css" rel="stylesheet">
+    <link href="${STATIC_URL}css/style.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script type="text/javascript">
+
+        var site_url = "/";            // app的url前缀,在ajax调用的时候，应该加上该前
+    </script>
+
+    <%block name = "head_js">
+    </%block>
+
+
+
+</head>
+
+<body class="top-navigation">
+
+    <div id="wrapper">
+        <div id="page-wrapper" class="gray-bg">
+            <div class="row border-bottom white-bg">
+                <nav class="navbar navbar-static-top" role="navigation">
+                    <div class="navbar-header">
+
+                        <a href="/catalog/" class="navbar-brand">心理测试</a>
+                    </div>
+                </nav>
+            </div>
+            <div class="container">
+               <div class="">
+                   <%block name = "content">
+                    </%block>
+               </div>
+            </div>
+    <%block name = "js">
+    </%block>
+</body>
+
+</html>

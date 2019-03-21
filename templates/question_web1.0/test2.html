@@ -1,0 +1,76 @@
+ <%inherit file="/base.html"/>
+ <%block name = "head_js">
+        <script>var i = 1</script>
+    </%block>
+
+<%block name = "content">
+
+        <div class="col-sm-9">
+                        <input type="text" class="form-control bk-valign-top" id="qes_name" placeholder="提示信息" value="${qes_title}" > </div>
+            <button id="button_confirm" type="button" class="btn btn-success" query_id="${query_id}">重命名</button>
+         <div id="question_body"  >
+
+             % for question in questions:
+             <p><script>document.write(i);i++</script>.${question.name}</p>
+                <label>1.</label>
+             <label>
+                 <input type="radio"  value=1 name = ${question.name} class="qes">${question.item_1}
+             </label>
+
+                <br>
+                <label>2.</label>
+             <label><input type="radio" value=0 name=${question.name} class="qes">${question.item_2}</label>
+
+                <br>
+              <a href="/developer/admin/qes_body/edit/${question.pk}" class="btn btn-xs btn-primary">编辑 <i
+                                        class="glyphicon glyphicon-edit"></i> </a>
+             <a  href="/developer/admin/delete/item/${question.pk}"  class="btn btn-xs btn-danger btn-delete" > <i
+                               class="glyphicon glyphicon-remove"></i> 删除</a>
+             % endfor
+             <a href="/developer/admin/qes_body/add/${query_id}" class ="btn btn-lg btn-add  btn-block"><i
+                class="glyphicon glyphicon-plus"></i>新增</a>
+             <hr />
+              <a href="/developer/qes_body/result_edit/${query_id}" class ="btn btn-lg   btn-block"><i
+                class="glyphicon glyphicon-plus"></i>编辑结果</a>
+        </div>
+</%block>
+
+
+
+<%block name = "js">
+        <script src="${STATIC_URL}js/jquery-3.1.1.min.js"></script>
+        <script src="${STATIC_URL}js/bootstrap.min.js"></script>
+        <script>
+            $(function () {
+                $("#question_body").on('click','.btn-delete' ,function (e) {
+                    e.preventDefault();
+                    if(confirm('确认删除')){
+                        url = $(this).attr('href')
+                        $.get(url,function (res) {
+                             alert(res.message)
+                            if(res.result){
+
+                                window.location=res.data
+                            }
+
+                        })
+                    }
+                })
+            })
+            $(function () {
+                $("#button_confirm").on('click',function () {
+                    var param = {rename:$("#qes_name").val()}
+                    var url = site_url+'developer/admin/query/rename/'+$(this).attr("query_id")+'/'
+                    if(confirm('确认修改？')){
+                        $.post(url,param,function (res) {
+                        alert(res.message)
+                        if(res.result){
+                            window.location=site_url+'developer'
+                            }
+                        })
+                    }
+
+                })
+            })
+        </script>
+ </%block>
