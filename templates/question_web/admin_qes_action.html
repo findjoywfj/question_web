@@ -21,7 +21,7 @@
                     <button id="button_confirm" type="button" class="btn btn-primary btn-block " query_id="${query_id}">重命名</button>
                         <div class="panel panel-default"id="question_body">
                             % for question in questions:
-                            <div class="panel-body" >
+                            <div class="panel-body" id = "qes_item">
                                 <h3><script>document.write(i);i++</script>.${question.name}</h3>
                                  <a href="/developer/admin/qes_body/edit/${question.pk}" class="btn btn-xs btn-primary">编辑 <i
                                         class="glyphicon glyphicon-edit"></i> </a>
@@ -33,11 +33,32 @@
 
                             </div>
                             % endfor
-                              <a href="/developer/admin/qes_body/add/${query_id}" class ="btn btn-lg btn-add  btn-block"><i
+
+                            <div align="center" id = "appendix_item" >
+                                    <p  hidden="True" id = "appendix_p">
+                                        <script src="${STATIC_URL}js/jquery-3.1.1.min.js"></script>
+                                        <script>
+                                    var a = document.getElementById("question_body")
+                                    if (a.firstElementChild.id != "qes_item"){
+                                        document.write("还没有题目哟")
+                                        $("#appendix_p").show()
+                                        var img_cry=document.createElement("img");
+                                        var node=document.createTextNode("这是一个新段落。");
+                                        img_cry.src = "${STATIC_URL}Img/cry.jpg"
+                                        img_cry.class = "img-responsive"
+                                        img_cry.alt = "Responsive image"
+
+                                        $("#appendix_item").prepend(img_cry)
+
+
+                                    }
+                                </script></p>
+                              <a href="/developer/admin/qes_body/add/${query_id}" class ="btn btn-warning   btn-rounded " ><i
                                     class="glyphicon glyphicon-plus"></i>新增题目</a>
-                                <hr />
-                              <a href="/developer/qes_body/result_edit/${query_id}" class ="btn btn-lg   btn-block"><i
+
+                              <a href="/developer/qes_body/result_edit/${query_id}" class ="btn btn-info  btn-rounded"><i
                                     class="glyphicon glyphicon-plus"></i>编辑结果</a>
+                            </div>
                             <button type="button" class="btn btn-primary btn-block" onclick="homeback()">返回</button>
                         </div>
                     </div>
@@ -50,7 +71,7 @@
     </%block>
 
 <%block name = "js">
-    <script src="${STATIC_URL}js/jquery-3.1.1.min.js"></script>
+
     <script src="${STATIC_URL}js/bootstrap.min.js"></script>
 
     <script>

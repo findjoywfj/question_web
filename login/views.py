@@ -7,7 +7,7 @@ from login.models import User
 from django.http import JsonResponse
 # Create your views here.
 def login_home(request):
-    return render_mako_context(request, 'question_web/login.html')
+    return render_mako_context(request, '/question_web/login.html')
 
 def login_to(request):
     try:
