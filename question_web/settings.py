@@ -100,8 +100,14 @@ DATABASES = {
         'HOST': '127.0.0.1',                            # 开发的时候，使用localhost
         'PORT': '3306',               # 默认3306
     },
+    'mongotest':{
+        'ENGINE': None,
+    },
 }
 
+import mongoengine
+
+conn = mongoengine.connect("mongotest")
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
 
@@ -139,7 +145,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'all_static') # 所有的静态文静聚合的目录,用python manage.py collectstatic 会把所有的static文件都复制到STATIC_ROOT文件夹下
+STATIC_ROOT = os.path.join(BASE_DIR, 'static') # 所有的静态文静聚合的目录,用python manage.py collectstatic 会把所有的static文件都复制到STATIC_ROOT文件夹下
 TEMPLATE_CONTEXT_PROCESSORS = (
     # the context to the templates
     'django.contrib.auth.context_processors.auth',

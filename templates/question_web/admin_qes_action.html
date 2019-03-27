@@ -6,10 +6,10 @@
 
 <%block name = "content">
 
-<div class="row">
-        <div class="col-md-8">
-            <div class="ibox">
-                    <div class="ibox-content ">
+<div class="row" >
+        <div class="col-md-8"  style="padding: 0px">
+            <div class="ibox" >
+                    <div class="ibox-content " >
                             <div class="sk-spinner sk-spinner-double-bounce">
                                     <div class="sk-double-bounce1"></div>
                                     <div class="sk-double-bounce2"></div>
@@ -22,14 +22,18 @@
                         <div class="panel panel-default"id="question_body">
                             % for question in questions:
                             <div class="panel-body" id = "qes_item">
-                                <h3><script>document.write(i);i++</script>.${question.name}</h3>
-                                 <a href="/developer/admin/qes_body/edit/${question.pk}" class="btn btn-xs btn-primary">编辑 <i
+                                <script>document.write(i);i++</script>.${question.name}
+                                 <a href="/developer/admin/qes_body/edit/${question.id}" class="btn btn-xs btn-primary">编辑 <i
                                         class="glyphicon glyphicon-edit"></i> </a>
-                                 <a  href="/developer/admin/delete/item/${question.pk}"  class="btn btn-xs btn-danger btn-delete" > <i
+                                 <a  href="/developer/admin/delete/item/${question.id}"  class="btn btn-xs btn-danger btn-delete" > <i
                                          class="glyphicon glyphicon-remove"></i> 删除</a>
-                                <div class="list-group">
-
-                                </div>
+                                <ul class="list-group">
+                                    % for item in question.items:
+                                    <li class="list-group-item">
+                                        ${item["content"]}<span class="label label-default">得分：${item["score"]}</span>
+                                    </li>
+                                    % endfor
+                                </ul>
 
                             </div>
                             % endfor
@@ -43,7 +47,6 @@
                                         document.write("还没有题目哟")
                                         $("#appendix_p").show()
                                         var img_cry=document.createElement("img");
-                                        var node=document.createTextNode("这是一个新段落。");
                                         img_cry.src = "${STATIC_URL}Img/cry.jpg"
                                         img_cry.class = "img-responsive"
                                         img_cry.alt = "Responsive image"
@@ -73,7 +76,7 @@
 <%block name = "js">
 
     <script src="${STATIC_URL}js/bootstrap.min.js"></script>
-
+    <script src="${STATIC_URL}js/jquery-3.1.1.min.js"></script>
     <script>
             function homeback(){
                 window.location = site_url+"developer/"
@@ -83,7 +86,7 @@
                 $("#question_body").on('click','.btn-delete' ,function (e) {
                     e.preventDefault();
                     if(confirm('确认删除')){
-                        url = $(this).attr('href')
+                        var url = $(this).attr('href')
                         $.get(url,function (res) {
                              alert(res.message)
                             if(res.result){

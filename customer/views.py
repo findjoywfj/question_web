@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-from developer.models import Question,Query_qes,ResultSimple
+from developer.models import Question,Query_qes,ResultSimple,Questions_mongo,Question_mongo
 from question_web.mymako import render_mako_context
 from django.http import JsonResponse
 from django.shortcuts import render
@@ -8,37 +8,40 @@ from django.shortcuts import render
 # Create your views here.
 
 def home(request):
-    qes_query = Query_qes.objects.all()
+    qes_query = Questions_mongo.objects.all()
     return render_mako_context(request, '/question_web/home.html',
                                {'qes_query': qes_query})
 
 def qes_show(request, query_id):
 
-    qes_query = Query_qes.objects.get(id=query_id)
-    questions = Question.objects.all().filter(belong_id=query_id)
+    qes_query = Questions_mongo.objects.get(id=query_id)
+    questions = qes_query.question
+    num = len(questions)
     return render_mako_context(request, '/question_web/qes_body.html', {
         #'question_name': 1,
-        'qes_title':qes_query.name,
+        'qes_title':qes_query.title,
         'questions': questions,
-        'num': questions.count()
+        'num': num
 
 
     })
 
 def qes_result(request,query_id, score):
     try:
-        result = ResultSimple.objects.get(belong_id = query_id)
-        score_temp =  int(score)
-        if score_temp <= result.level_1:
-            content = result.content_1
-        elif score_temp > result.level_1 and score_temp <= result.level_2:
-            content = result.content_2
-        else:
-            content = result.content_3
+        questions = Questions_mongo.objects.get(id=query_id)
+        result = questions.result
+        score_temp = int(score)
+        result_data = result.items
+        content = "未查到结果"
+        for item in result_data:
+            if score_temp <= int(item["level"]):
+                content = item["content"]
+                break
+
         return render_mako_context(request, 'question_web/qes_result.html',{
-                'name': Query_qes.objects.get(id=query_id).name,
+                'title': questions.title,
                 'result': content,
-                'belong': query_id,
+                'query_id': query_id,
             })
         # return JsonResponse({
         #         'result': True,

@@ -1,96 +1,149 @@
+<!--这是开发者 编辑某个题库页面-->
 <%inherit file="/base.html"/>
- <%block name = "content">
-    <div class="king-page-box">
-        <div class="king-container clearfix">
-            <h2>${query.name}</h2>
-            <p id="query_id" hidden>${query.pk}</p>
-            <form class="form-horizontal">
-                <div class="form-group clearfix ">
-                    <label class="col-sm-3 control-label bk-lh30 pt0">题目名称：</label>
-                    <div class="col-sm-9">
-                        <input type="text" class="form-control bk-valign-top" id="qes_name" placeholder="提示信息" value="${question.name}"> </div>
-                </div>
-                <div class="form-group clearfix ">
-                    <label class="col-sm-3 control-label bk-lh30 pt0">选项一：</label>
-                    <div class="col-sm-9">
-                        <input type="text" class="form-control bk-valign-top" id="item_1" placeholder="提示信息" value="${question.item_1}"> </div>
-                </div>
-                <div class="form-group clearfix ">
-                    <label class="col-sm-3 control-label bk-lh30 pt0">选项二：</label>
-                    <div class="col-sm-9">
-                        <input type="text" class="form-control bk-valign-top" id="item_2" placeholder="提示信息" value="${question.item_2}"> </div>
-                </div>
-                <div class="form-group clearfix ">
-                    <label class="col-sm-3 control-label bk-lh30 pt0">选项一得分：</label>
-                    <div class="col-sm-9">
-                        <select name="" id="item_1_score" class="form-control bk-valign-top">
-                            <option value="1" ${"selected" if question.item_1_score == 1 else ""}>1</option>
-                            <option value="0" ${"selected" if question.item_1_score == 0 else ""}>0</option>
-                        </select>
+ <%block name = "head_js">
+        <script>var i = 1</script>
+    </%block>
+
+<%block name = "content">
+    <div class="row" id="question">
+
+    <div class="col-sm-6">
+        <div class="ibox float-e-margins" >
+            <div class="ibox-title">
+                <h5>
+                    ${u"新建问题" if opt == "add" else u"编辑问题"}
+                </h5>
+
+            </div>
+            <div class="ibox-content">
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">问题</label>
+
+                        <div class="col-sm-10">
+                            <textarea type="text" class="form-control"  placeholder="${question.name}" id = "question_name" >${question.name if opt =="edit" else ""}</textarea>
+                        </div>
                     </div>
-                </div>
-                <div class="form-group clearfix ">
-                    <label class="col-sm-3 control-label bk-lh30 pt0">选项二得分：</label>
-                    <div class="col-sm-9">
-                        <select name="" id="item_2_score" class="form-control bk-valign-top">
-                            <option value="1" ${"selected" if question.item_2_score == 1 else ""}>1</option>
-                            <option value="0" ${"selected" if question.item_2_score == 0 else ""}>0</option>
-                        </select>
+                    <div class="form-group">
+                            <label class="col-sm-2 control-label">选项</label>
                     </div>
-                </div>
-                <div class="form-group clearfix">
-                    <div class="col-sm-9 col-sm-offset-3">
-                        <button id="btn_submit" type="button" class="btn btn-primary btn-lg"  opt = "${opt}" item_id = "${question.id}">提交</button>
-                        <button id="btn_cancel"type="button" class=" btn btn-danger btn-lg ">取消</button>
+                    <div class="form-group"  id="question_item">
+                        % for item in question.items:
+                        <div class="col-sm-12">
+
+                                <div class="col-sm-8">
+                                    <div class="input-group">
+                                        <span class="input-group-btn" ><a class="btn  btn-danger btn_item_remove"  ><i class="fa fa-times"></i></a> </span>
+                                        <input type="text" placeholder="选项" class="form-control item_content"  value="${item["content"]}"  >
+                                    </div>
+                                </div>
+
+
+
+                                <div class="col-sm-2"><input type="number" value="${item["score"]}" class="form-control item_score" ></div>
+
+
+
+                        </div>
+                         %endfor
+
                     </div>
-                </div>
-            </form>
+
+
+                    <div class="form-group">
+                            <div class="col-sm-6">
+                                <a class="btn btn-primary btn-outline  btn-block btn-rounded"   id = "btn_item_add">新增选项</a>
+                            </div>
+                            <div class="col-sm-6">
+                                <a class="btn btn-primary btn-block btn-rounded" id = "btn_submit">保存</a>
+                            </div>
+                            <div class = "col-sm-12">
+                                <button id="btn_cancel"type="button" class="btn btn-block btn-primary  ">取消</button>
+                            </div>
+                        </div>
+
+                </form>
+            </div>
         </div>
     </div>
-</%block>
+
+    </%block>
+
 <%block name = "js">
      <script src="${STATIC_URL}js/jquery-3.1.1.min.js"></script>
     <script src="${STATIC_URL}js/bootstrap.min.js"></script>
 <script>
+        $(function () {
+            $("#btn_item_add").on('click', function () {
+                var new_div = document.createElement("div")
+
+                new_div.innerHTML = " <div class=\"col-sm-12\">\n" +
+                    "\n" +
+                    "                                <div class=\"col-sm-8\">\n" +
+                    "                                    <div class=\"input-group\">\n" +
+                    "                                        <span class=\"input-group-btn\"><a class=\"btn  btn-danger btn_item_remove\" ><i class=\"fa fa-times\"></i></a> </span>\n" +
+                    "                                        <input type=\"text\" placeholder=\"选项\" class=\"form-control item_content\"   >\n" +
+                    "                                    </div>\n" +
+                    "                                </div>\n" +
+                    "\n" +
+                    "\n" +
+                    "\n" +
+                    "                                <div class=\"col-sm-2\"><input type=\"number\" placeholder=\"得分\" class=\"form-control item_score\" ></div>\n" +
+                    "\n" +
+                    "\n" +
+                    "\n" +
+                    "                        </div>"
+                document.getElementById("question_item").append(new_div)
+            })
+        })
 
         $(function () {
+            $("#question_item").on('click','.btn_item_remove', function () {
+                $(this).parent().parent().parent().parent().remove()
+            })
+
+        })
+        $(function () {
+
             $("#btn_submit").on('click', function (e) {
-                 function get_param() {
-                 return{
-
-                        qes_name:$("#qes_name").val(),
-                        item_1:$("#item_1").val(),
-                        item_2:$("#item_2").val(),
-                        item_1_score:$("#item_1_score").val(),
-                        item_2_score:$("#item_2_score").val()
-
-                 }
-        }
-                var opt = $(this).attr('opt')
-                var query_id = document.getElementById("query_id").firstChild.nodeValue
-                var qes_Param = get_param()
+                var item_content = document.getElementsByClassName('item_content')
+                var item_score = document.getElementsByClassName('item_score')
+                var item_param =  new Array()
+                for(var i = 0; i  <item_content.length; i++){
+                    //var item_dict =  {content: item_content[i].value, score: item_score[i].value}
+                    var item_dict = {}
+                    item_dict["content"] = item_content[i].value
+                    item_dict["score"] = item_score[i].value
+                    //item_param.push(item_dict)
+                    item_param.push(item_dict)
+                }
+                var Param = JSON.stringify(item_param)
+                var param = {data:Param, name: $("#question_name").val()}
                 var url = site_url
-                if(opt == 'add') {
-                    url += 'developer/admin/qes_body/add/' + query_id + '/'
+                var opt = "${opt}"
+                if (opt == "add") {
+                    url += 'developer/admin/qes_body/add/' + '${questions.id}' + '/'
                 }
-                else if(opt == 'edit'){
-                     var item_id = $(this).attr('item_id')
-                     url += 'developer/admin/qes_body/edit/'+item_id+'/'
+                else if(opt == "edit"){
+                    url += 'developer/admin/qes_body/edit/' + '${question.id}' + '/'
                 }
-                $.post(url, qes_Param,function (res) {
+
+                $.post(url, param, function (res) {
                     alert(res.message);
                     if(res.result){
-                        window.location = site_url+'developer/admin/qes_body/action/'+query_id+'/'
+                        window.location = site_url+'developer/admin/qes_body/action/'+'${questions.id}'+'/'
                     }
 
                 },'json')
             })
 
-            $("#btn_cancel").on('click',function (e) {
-                 var query_id = document.getElementById("query_id").firstChild.nodeValue
-                 window.location = site_url+'developer/admin/qes_body/action/'+query_id+'/'
 
+        })
+        $(function () {
+            $("#btn_cancel").click(function () {
+                history.back(-1)
             })
+
         })
     </script>
 </%block>

@@ -1,0 +1,139 @@
+<!--这是开发者 编辑某个题库页面-->
+<%inherit file="/base.html"/>
+ <%block name = "head_js">
+        <script>var i = 1</script>
+    </%block>
+
+<%block name = "content">
+    <div class="row" id="question">
+
+    <div class="col-sm-6">
+        <div class="ibox float-e-margins" >
+            <div class="ibox-title">
+                        <h5 >新建问题</h5>
+            </div>
+            <div class="ibox-content">
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">问题</label>
+
+                        <div class="col-sm-10">
+                            <textarea type="text" class="form-control"  placeholder = "${questions.title}"  id = "question_name" ></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                            <label class="col-sm-2 control-label">选项</label>
+                    </div>
+                    <script>var item_index = 1</script>
+                    <div class="form-group"  id = "question_item">
+                        % for item in question.items:
+                        <div class="col-sm-12">
+
+                                <div class="col-sm-8">
+                                    <div class="input-group">
+                                        <span class="input-group-btn" ><a class="btn  btn-danger btn_item_remove"  ><i class="fa fa-times"></i></a> </span>
+                                        <input type="text" placeholder="选项" class="form-control item_content"   >
+                                    </div>
+                                </div>
+
+
+
+                                <div class="col-sm-2"><input type="number" placeholder="${item["score"]}" class="form-control item_score" ></div>
+
+
+
+                        </div>
+                         %endfor
+
+                    </div>
+
+
+                    <div class="form-group">
+                            <div class="col-sm-6">
+                                <a class="btn btn-primary btn-outline  btn-block"   id = "btn_item_add">新增选项</a>
+                            </div>
+                            <div class="col-sm-6">
+                                    <button class="btn btn-primary btn-block" id = "btn_submit">保存<button>
+                            </div>
+                        </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+    </%block>
+
+<%block name = "js">
+     <script src="${STATIC_URL}js/jquery-3.1.1.min.js"></script>
+    <script src="${STATIC_URL}js/bootstrap.min.js"></script>
+<script>
+        $(function () {
+            $("#btn_item_add").on('click', function () {
+                var new_div = document.createElement("div")
+                new_div.innerHTML = " <div class=\"col-sm-12\">\n" +
+                    "\n" +
+                    "                                <div class=\"col-sm-8\">\n" +
+                    "                                    <div class=\"input-group\">\n" +
+                    "                                        <span class=\"input-group-btn\"><a class=\"btn  btn-danger btn_item_remove\" ><i class=\"fa fa-times\"></i></a> </span>\n" +
+                    "                                        <input type=\"text\" placeholder=\"选项\" class=\"form-control item_content\"   >\n" +
+                    "                                    </div>\n" +
+                    "                                </div>\n" +
+                    "\n" +
+                    "\n" +
+                    "\n" +
+                    "                                <div class=\"col-sm-2\"><input type=\"number\" placeholder=\"得分\" class=\"form-control item_score\" ></div>\n" +
+                    "\n" +
+                    "\n" +
+                    "\n" +
+                    "                        </div>"
+                document.getElementById("question_item").append(new_div)
+            })
+        })
+
+        $(function () {
+            $("#question_item").on('click','.btn_item_remove', function () {
+                $(this).parent().parent().parent().parent().remove()
+            })
+
+        })
+        $(function () {
+                function getparam(){
+                    return{
+                        data: '123'
+                    }
+                }
+            $("#btn_submit").on('click', function (e) {
+                var item_content = document.getElementsByClassName('item_content')
+                var item_score = document.getElementsByClassName('item_score')
+                var item_param =  new Array()
+                for(var i = 0; i< item_content.length; i++){
+                    //var item_dict =  {content: item_content[i].value, score: item_score[i].value}
+                    var item_dict = {}
+                    item_dict["content"] = item_content[i].value
+                    item_dict["score"] = item_score[i].value
+                    item_param.splice(0,0,item_dict)
+                }
+                var Param = JSON.stringify(item_param)
+                var param = {data:Param, name: $("#question_name").val()}
+                var url = site_url
+
+                    url += 'developer/admin/qes_body/add/' + 4 + '/'
+
+                $.post(url, param, function (res) {
+                    alert(res.message);
+                    if(res.result){
+                        window.location = site_url+'developer/admin/qes_body/action/'+4+'/'
+                    }
+
+                },'json')
+            })
+
+            $("#btn_cancel").on('click',function (e) {
+                 var query_id = document.getElementById("query_id").firstChild.nodeValue
+                 window.location = site_url+'developer/admin/qes_body/action/'+query_id+'/'
+
+            })
+        })
+    </script>
+</%block>

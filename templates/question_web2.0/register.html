@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>INSPINIA | Register</title>
+
+    <link href="${STATIC_URL}css/bootstrap.min.css" rel="stylesheet">
+    <link href="${STATIC_URL}font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="${STATIC_URL}css/plugins/iCheck/custom.css" rel="stylesheet">
+    <link href="${STATIC_URL}css/animate.css" rel="stylesheet">
+    <link href="${STATIC_URL}css/style.css" rel="stylesheet">
+     <script type="text/javascript">
+
+        var site_url = "/";            // app的url前缀,在ajax调用的时候，应该加上该前
+    </script>
+
+</head>
+
+<body class="gray-bg">
+
+    <div class="middle-box text-center loginscreen   animated fadeInDown">
+        <div>
+            <div>
+
+                <h1 class="logo-name">XIN</h1>
+
+            </div>
+            <h3>Register to XIN</h3>
+            <p>现在来创建账户吧</p>
+            <form class="m-t" role="form" >
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Name" required="" id="username">
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" placeholder="Password" required="" id="password">
+                </div>
+                <div class="form-group">
+                        <div class="checkbox i-checks"><label> <input type="checkbox"><i></i>同意协议 </label></div>
+                </div>
+                <button type="button" class="btn btn-primary block full-width m-b" id="register">注册</button>
+
+                <p class="text-muted text-center"><small>Already have an account?</small></p>
+                <a class="btn btn-sm btn-white btn-block" href= "/">登陆</a>
+            </form>
+            <p class="m-t"> <small>Inspinia we app framework base on Bootstrap 3 &copy; 2014</small> </p>
+        </div>
+    </div>
+
+    <!-- Mainly scripts -->
+    <script src="${STATIC_URL}js/jquery-3.1.1.min.js"></script>
+    <script src="${STATIC_URL}js/bootstrap.min.js"></script>
+    <!-- iCheck -->
+    <script src="${STATIC_URL}js/plugins/iCheck/icheck.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('.i-checks').iCheck({
+                checkboxClass: 'icheckbox_square-green',
+                radioClass: 'iradio_square-green',
+            });
+        });
+    </script>
+    <script>
+         function getparam() {
+            return{
+                name :$("#username").val(),
+                password :$("#password").val()
+            }
+        }
+        $(function () {
+             $("#register").click(function () {
+             var param = getparam()
+             url = site_url+'register/action/'
+             $.post(url,param,function (res) {
+                 alert(res.message)
+                 if(res.result){
+                     window.location=site_url
+                 }
+             })
+        })
+
+        })
+
+    </script>
+
+</body>
+
+</html>

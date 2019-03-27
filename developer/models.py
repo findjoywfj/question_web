@@ -7,7 +7,8 @@ from __future__ import unicode_literals
 # -*- coding: utf-8 -*-
 
 from django.db import models
-
+import mongoengine
+from bson import ObjectId
 quit
 
 
@@ -112,3 +113,45 @@ class ResultSimple(models.Model):
 
      def __str__(self):
          return "%s" % (self.belong_id)
+
+
+class Question_mongo(mongoengine.DynamicEmbeddedDocument):
+    id = mongoengine.ObjectIdField(required=True, default=ObjectId,
+                                   unique=True, primary_key=True)
+    name = mongoengine.StringField(max_length=200)
+    items = mongoengine.ListField(default=[])
+
+
+class Result(mongoengine.DynamicEmbeddedDocument):
+    id = mongoengine.ObjectIdField(required=True, default=ObjectId,
+                                   unique=True, primary_key=True)
+    items = mongoengine.ListField(default=[])
+
+
+class Questions_mongo(mongoengine.DynamicDocument):
+        title = mongoengine.StringField(max_length=200)
+        question = mongoengine.EmbeddedDocumentListField(Question_mongo, default=[])
+        result = mongoengine.EmbeddedDocumentField(Result)
+        #count = mongoengine.IntField(default=0)
+
+
+
+class Test_embedded_mongo(mongoengine.DynamicEmbeddedDocument):
+    id = mongoengine.ObjectIdField(required=True, default=ObjectId,
+                    unique=True, primary_key=True)
+    name = mongoengine.StringField(max_length=200)
+    items = mongoengine.ListField()
+
+class Test_embedded_mongo_1(mongoengine.EmbeddedDocument):
+    name = mongoengine.StringField(max_length=200)
+    items = mongoengine.ListField()
+class Test_mongo(mongoengine.Document):
+    title = mongoengine.StringField(max_length=100)
+    question = mongoengine.EmbeddedDocumentListField(Test_embedded_mongo, default=[])
+
+class Test_mongo_delete(mongoengine.Document):
+    title = mongoengine.StringField(max_length=100)
+    question = mongoengine.ListField(mongoengine.EmbeddedDocumentField(Test_embedded_mongo), default=[])
+
+
+

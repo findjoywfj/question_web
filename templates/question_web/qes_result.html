@@ -1,6 +1,6 @@
 <%inherit file="/base.html"/>
 <%block name = "content">
-    <h1>${name}</h1>
+    <h1>${title}</h1>
     <h2>测试结果</h2>
     <p>${result}</p>
     <div align="center">
@@ -13,7 +13,7 @@
     <script>
         $("#back").click(function () {
             var url = "/customer/qes_body/"
-            url +=${belong}
+            url +="${query_id}"
             window.location=url
         })
     </script>

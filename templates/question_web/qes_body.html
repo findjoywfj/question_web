@@ -19,16 +19,13 @@
                             <div class="panel-body" id = "qes_item">
                                 <h3><script>document.write(i);i++</script>.${question.name}</h3>
                                 <div class="list-group">
+                                    % for item in question.items:
                                     <div class="list-group-item" >
                                           <label>
-                                                <input type="radio"  value=${question.item_1_score} name = ${question.name} class="qes">${question.item_1}
+                                                <input type="radio"  value=${item["score"]} name = ${question.name} class="qes">${item["content"]}
                                           </label>
                                     </div>
-                                    <div class="list-group-item">
-                                          <label>
-                                             <input type="radio" value=${question.item_2_score} name=${question.name} class="qes">${question.item_2}
-                                         </label>
-                                    </div>
+                                    % endfor
                                 </div>
 
                             </div>
@@ -69,6 +66,7 @@
 
          <script src="${STATIC_URL}js/bootstrap.min.js"></script>
         <script>
+
             $(function () {
 
                 $("#btn-submit").on('click', function (e) {

@@ -18,21 +18,21 @@
                     </thead>
                     <tbody id="qes_body">
 
-                        %for questions in qes_query:
+                        %for questions in question_query:
 
                         <tr>
                             <td style="width: 70px"><script>
                                     document.write(i)
                                     i++
                             </script></td>
-                            <td>${questions.name}</td>
-                            <td>${questions.count}</td>
+                            <td>${questions.title}</td>
+                            <td>${len(questions.question)}</td>
                             <td>
                                 <p>编辑
-                                <a href="admin/qes_body/action/${questions.pk}" class="btn btn-xs btn-primary"> <span
+                                <a href="admin/qes_body/action/${questions.id}" class="btn btn-xs btn-primary"> <span
                                         class="glyphicon glyphicon-pencil"></span> </a></p>
                                 <p>删除
-                                <a href="admin/delete/${questions.pk}" class="btn btn-xs btn-danger btn-delete" > <span
+                                <a href="admin/delete/${questions.id}" class="btn btn-xs btn-danger btn-delete" > <span
                                         class="glyphicon glyphicon-remove"></span> </a></p>
                             </td>
                         </tr>
@@ -48,6 +48,7 @@
                                 <input type="text" class="form-control" id="new_query_name" placeholder="请输入">
                               </div>
                               <button id= "btn_add_confirm" type="button" class="btn btn-default">确认</button>
+                              <button id= "btn_add_cancel" type="button" class="btn btn-default">取消</button>
                 </form>
             </div>
     </div>
@@ -62,6 +63,13 @@
             $("#btn_add").on('click',function () {
 
                 $("#name_box").show()
+
+            })
+        })
+         $(function () {
+            $("#btn_add_cancel").on('click',function () {
+                $("#new_query_name").val("")
+                $("#name_box").hide()
 
             })
         })

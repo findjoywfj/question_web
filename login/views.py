@@ -5,6 +5,8 @@ from django.shortcuts import render
 from question_web.mymako import render_mako_context
 from login.models import User
 from django.http import JsonResponse
+from django.shortcuts import HttpResponse
+from django.views.generic import View
 # Create your views here.
 def login_home(request):
     return render_mako_context(request, '/question_web/login.html')
@@ -44,6 +46,7 @@ def login_to(request):
 def register(request):
     return render_mako_context(request, 'question_web/register.html')
 
+
 def register_action(request):
     name = request.POST["name"]
     password = request.POST["password"]
@@ -64,3 +67,10 @@ def register_action(request):
             'result': False,
             'message': '注册失败'
         })
+
+
+def test(request):
+        # name = request.POST["name"]
+        # password = request.POST["password"]
+        Question_mongo.objects.create(name = {"name": "wfj", "passward": "123"})
+        return HttpResponse("OK")
