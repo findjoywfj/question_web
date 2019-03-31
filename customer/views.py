@@ -9,7 +9,7 @@ from django.shortcuts import render
 
 def home(request):
     questions = Questions_mongo.objects.all()
-    return render_mako_context(request, '/question_web/test2.html',
+    return render_mako_context(request, '/question_web/home.html',
                                {'questions': questions})
 
 

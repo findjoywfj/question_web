@@ -1,21 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="fa339db3-215b-4e57-a9d4-55268eb552eb" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/customer/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/customer/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/customer/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/customer/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/developer/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/developer/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/developer/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/developer/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/developer/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/developer/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/question_web/admin_qes_action.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/question_web/admin_qes_action.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/question_web/admin_qes_body.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/question_web/admin_qes_body.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/question_web/qes_body.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/question_web/qes_body.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/question_web/qes_edit.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/question_web/qes_edit.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/question_web/result_edit.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/question_web/result_edit.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/question_web/test1.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/question_web/test1.html" afterDir="false" />
-    </list>
+    <list default="true" id="fa339db3-215b-4e57-a9d4-55268eb552eb" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -43,8 +29,8 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/developer/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="818">
-              <caret line="167" column="90" lean-forward="true" selection-start-line="167" selection-start-column="32" selection-end-line="167" selection-end-column="90" />
+            <state relative-caret-position="2753">
+              <caret line="167" column="90" selection-start-line="167" selection-start-column="32" selection-end-line="167" selection-end-column="90" />
               <folding>
                 <element signature="e#24#63#0" expanded="true" />
               </folding>
@@ -52,7 +38,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="settings.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="settings.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/question_web/settings.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-2849">
@@ -60,6 +46,27 @@
               <folding>
                 <element signature="e#341#350#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/customer/views.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="539">
+              <caret line="25" column="18" selection-start-line="25" selection-start-column="18" selection-end-line="25" selection-end-column="18" />
+              <folding>
+                <element signature="e#24#63#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="test2.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/templates/question_web/test2.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="25">
+              <caret line="35" column="28" selection-start-line="35" selection-start-column="28" selection-end-line="35" selection-end-column="28" />
             </state>
           </provider>
         </entry>
@@ -182,6 +189,11 @@
             <path>
               <item name="question_web" type="b2602c69:ProjectViewProjectNode" />
               <item name="question_web" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="question_web" type="b2602c69:ProjectViewProjectNode" />
+              <item name="question_web" type="462c0819:PsiDirectoryNode" />
+              <item name="customer" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="question_web" type="b2602c69:ProjectViewProjectNode" />
@@ -593,16 +605,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/question_web/test2.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="25">
-          <caret line="35" column="28" selection-start-line="35" selection-start-column="28" selection-end-line="35" selection-end-column="28" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/package/Lib/site-packages/django/urls/resolvers.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="132">
@@ -673,28 +675,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/customer/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="625">
-          <caret line="25" column="18" selection-start-line="25" selection-start-column="18" selection-end-line="25" selection-end-column="18" />
-          <folding>
-            <element signature="e#24#63#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/customer/models.py">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/developer/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="818">
-          <caret line="167" column="90" lean-forward="true" selection-start-line="167" selection-start-column="32" selection-end-line="167" selection-end-column="90" />
-          <folding>
-            <element signature="e#24#63#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/developer/models.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -713,6 +695,33 @@
           <folding>
             <element signature="e#341#350#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/developer/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2753">
+          <caret line="167" column="90" selection-start-line="167" selection-start-column="32" selection-end-line="167" selection-end-column="90" />
+          <folding>
+            <element signature="e#24#63#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/customer/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="539">
+          <caret line="25" column="18" selection-start-line="25" selection-start-column="18" selection-end-line="25" selection-end-column="18" />
+          <folding>
+            <element signature="e#24#63#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/question_web/test2.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="25">
+          <caret line="35" column="28" selection-start-line="35" selection-start-column="28" selection-end-line="35" selection-end-column="28" />
         </state>
       </provider>
     </entry>
