@@ -8,11 +8,12 @@ from django.shortcuts import render
 # Create your views here.
 
 def home(request):
-    qes_query = Questions_mongo.objects.all()
-    return render_mako_context(request, '/question_web/home.html',
-                               {'qes_query': qes_query})
+    questions = Questions_mongo.objects.all()
+    return render_mako_context(request, '/question_web/test2.html',
+                               {'questions': questions})
 
-def qes_show(request, query_id):
+
+def qes_show(request, query_id, user_type):
 
     qes_query = Questions_mongo.objects.get(id=query_id)
     questions = qes_query.question
@@ -21,7 +22,9 @@ def qes_show(request, query_id):
         #'question_name': 1,
         'qes_title':qes_query.title,
         'questions': questions,
-        'num': num
+        'num': num,
+        'user_type':user_type
+
 
 
     })

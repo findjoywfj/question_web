@@ -1,0 +1,59 @@
+<%inherit file="/base.html"/>
+<%block name="content">
+
+<div class="row" id='question'>
+    %for item in questions:
+        <div class="col-md-3"  >
+            <div class="ibox">
+                <div class="ibox-content product-box">
+
+                    <div class="product-imitation" style="background-size:100% 100%;background-image: url(${item.logo})">
+
+                    </div>
+                    <div class="product-desc">
+
+                        <small class="text-muted"></small>
+                        <a href="#" class="product-name">${item.title}</a>
+
+
+
+                        <div class="small m-t-xs ">
+                             ${item.title}
+                        </div>
+                        <div class="m-t text-righ">
+
+                            <a href="/customer/qes_body/${item.id}" class="btn btn-xs btn-outline btn-primary">开始测试
+                                <i class="fa fa-long-arrow-right"></i>
+                            </a>
+                            <label  class="btn btn-xs btn-outline btn-primary pull-right">题目数量:${len(item.question)}
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+   %endfor
+                            <div class="text-center">
+                                <div class="btn-group">
+                                    <button class="btn btn-white" type="button"><i class="fa fa-chevron-left"></i></button>
+                                    <button class="btn btn-white">1</button>
+                                    <button class="btn btn-white  active">2</button>
+                                    <button class="btn btn-white">3</button>
+                                    <button class="btn btn-white">4</button>
+                                    <button class="btn btn-white">5</button>
+                                    <button class="btn btn-white">6</button>
+                                    <button class="btn btn-white">7</button>
+                                    <button class="btn btn-white" type="button"><i class="fa fa-chevron-right"></i> </button>
+                                </div>
+                            </div>
+</div>
+</%block>
+<%block name="js">
+
+
+
+</%block>
+
+<%block name="css">
+
+</%block>

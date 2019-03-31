@@ -11,6 +11,57 @@ import mongoengine
 from bson import ObjectId
 quit
 
+def db_mongo_init():
+
+    questions = Questions_mongo()
+    questions.title="测你是否有精神分裂"
+    qes_choices = [u"我喜欢到我从来没有去过的地方游览",
+                   u"我曾一连几天，几个星期，几个月什么也不想干，因为总是提不起精神",
+                   u"有时我有一种强烈的冲动，去做一些惊人或有害的事",
+                   u"我的记忆力似乎不错",
+                   u"遇到同学或不常见朋友。除非他们先向我打招呼，不然我就装作没看见",
+                   u"做什么事情，我都感到难以开头",
+                   u"我的日常生活中，充满着使我感兴趣的事情",
+                   u"我曾经有过几次突然不能控制自己的行动或言语，但当时我的头脑还很清醒。",
+                   u"我拒绝玩那些我玩不好的游戏",
+                   u"我不喜欢有人在我身旁"]
+    qes_choices_1 = [u"我干什么很少提前做计划，我属于那种一时兴起想干什么就干什么的人",
+                     u"只要不被发现，欺骗伴侣其实也没什么",
+                     u"如果临时出现更好的机会，取消以前和人达成的誓约也没有什么",
+                     u"看见受伤的小动物在痛苦中挣扎，我一点触动都没有",
+                     u"我特别喜欢飙车，坐云霄飞车，蹦极等高刺激活动",
+                     u"我为达目的不择手段，即使损害别人，利用别人也在所不惜",
+                     u"我特别有说服力。天生就能指使别人替我办事",
+                     u"我能胜任危险性高的工作，因为我脑子特别灵敏",
+                     u"当别人在巨大压力下惶惶不安时，我还能镇定自若",
+                     u"我之所以能欺诈某人，是因为他们容易被欺诈，这是他们自己的问题"]
+    questions.logo = "/static/Img/20170426141858.jpg"
+    questions.result = Result()
+    questions.save()
+    for i in range(1,11,1):
+        question = Question_mongo()
+        question.name = qes_choices[i-1]
+        question.items = [{'content': '', 'score': 1}, {'content': '', 'score': 1}]
+        questions.question.append(question)
+    questions.save()
+
+    questions_1 = Questions_mongo()
+    questions_1.title=u"反社会人格测试"
+    questions_1.logo = "/static/Img/20140801133758.jpg"
+    questions_1.result = Result()
+    questions_1.save()
+    for i in range(1, 11 ,1):
+        question_1=Question_mongo()
+        question_1.name = qes_choices_1[i-1]
+        question_1.items = [{'content': '', 'score': 1}, {'content': '', 'score': 1}]
+        questions_1.question.append(question_1)
+    questions_1.save()
+
+
+def db_mongo_delete():
+    quesions = Questions_mongo.objects(title="test")
+    for question in quesions:
+        question.delete()
 
 # Create your models here.
 def db_init():
@@ -132,6 +183,7 @@ class Questions_mongo(mongoengine.DynamicDocument):
         title = mongoengine.StringField(max_length=200)
         question = mongoengine.EmbeddedDocumentListField(Question_mongo, default=[])
         result = mongoengine.EmbeddedDocumentField(Result)
+        logo = mongoengine.StringField(max_length=200)
         #count = mongoengine.IntField(default=0)
 
 

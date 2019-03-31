@@ -1,130 +1,154 @@
 <%inherit file="/base.html"/>
 <%block name = "content">
-    <div class="row" >
+    <div class="row" id="result">
 
-    <div class="col-sm-6">
-        <div class="ibox float-e-margins" >
-            <div class="ibox-title">
-                <h3>
-                    ${question_name}
-                </h3>
-                <br>
-                <h3>编辑结果</h3>
+        <div class="col-sm-6">
+            <div class="ibox float-e-margins" >
+                <div class="ibox-title">
+                    <h3>
+                        ${question_name}
+                    </h3>
+                    <br>
+                    <h4 id="action_sign">新建解析 </h4>
 
-            </div>
-            <div class="ibox-content">
-
-                <form class="form-horizontal">
-                    <div class="form-group">
-                            <label class="col-sm-2 control-label">选项</label>
-                    </div>
-                    <div class="form-group"  id="result_item">
-                        % for item in result.items:
-                        <div class="col-sm-12">
-
-                                <div class="col-sm-8">
-                                    <div class="input-group">
-                                        <span class="input-group-btn" ><a class="btn  btn-danger btn_item_remove"  ><i class="fa fa-times"></i></a> </span>
-                                        <input type="text" placeholder="结果" class="form-control item_content"  value="${item["content"]}"  >
-                                    </div>
-                                </div>
+                </div>
+                <div class="ibox-content">
 
 
+                    <form class="form-horizontal">
 
-                                <div class="col-sm-2"><input type="number" value="${item["level"]}" class="form-control item_level" placeholder="得分"></div>
-
-
-
-                        </div>
-                         %endfor
-
-                    </div>
-
-
-                    <div class="form-group">
-                            <div class="col-sm-6">
-                                <a class="btn btn-primary btn-outline  btn-rounded btn-block"   id = "btn_item_add">新增结果项目</a>
-                            </div>
-                            <div class="col-sm-6">
-                                <a class="btn btn-primary btn-rounded btn-block" id = "btn_submit">保存</a>
+                        <div class="form-group"  >
+                            <label class="col-sm-2 control-label">分割点</label>
+                            <div class="col-sm-10">
+                                <input type="number" class="form-control" id="item-level" value="">
                             </div>
                         </div>
-                    <div>
-                          <button id="btn_cancel"type="button" class="btn btn-block btn-primary btn-block ">取消</button>
-                    </div>
-                </form>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">解析</label>
+                            <div class="col-sm-10">
+                                <textarea type="text" class="form-control" id="item-content" rows="5"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-6">
+                                <a class="btn btn-primary btn-rounded btn-block" id = "btn_submit" index="-1">保存</a>
+                            </div>
+                             <div class="col-sm-6">
+                                <a class="btn btn-primary btn-rounded btn-block" id = "btn_cancel">取消</a>
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
+         <div class="col-sm-6">
+            <div class="float-e-margins">
+                <div class="ibox-title">
+                    <h2>${question_name}</h2><small>${question_name}</small>
+                </div>
+                <div class="ibox-content" class="{  'sk-loading': loading }">
+                    <div class="sk-spinner sk-spinner-double-bounce">
+                                <div class="sk-double-bounce1"></div>
+                                <div class="sk-double-bounce2"></div>
+                    </div>
+                    <div class="scroll_content">
+                        <ul id="item_body" class="list-group">
+                            % for item in result.items:
+                             <li class="list-group-item">
+                                  <h5 >结果:${result.items.index(item)+1}   分割点:${item["level"]}
+                                     <label class="btn btn-sm btn-primary btn-edit"   index="${result.items.index(item)+1}" level="${item["level"]}">编辑
+                                      <i class="glyphicon glyphicon-edit"></i></label>
+                                     <label class="btn btn-sm btn-danger btn-delete" index = "${result.items.index(item)+1}">
+                                         <i class="glyphicon glyphicon-remove"></i> 删除</label>
+                                 </h5>
+                                 <p>${item["content"]}</p>
+
+                             </li>
+                            % endfor
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+
+
+        </div>
+
     </div>
 </%block>
 
 <%block name = "js">
+    <script src="/static/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
     <script src="${STATIC_URL}js/jquery-3.1.1.min.js"></script>
     <script src="${STATIC_URL}js/bootstrap.min.js"></script>
+    <script src="${STATIC_URL}js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
     <script>
 
-        $(function () {
-            $("#btn_item_add").on('click', function () {
-                var new_div = document.createElement("div")
-                new_div.class = "col-sm-12"
-                new_div.innerHTML =
-                    "                                <div class=\"col-sm-8\">\n" +
-                    "                                    <div class=\"input-group\">\n" +
-                    "                                        <span class=\"input-group-btn\"><a class=\"btn  btn-danger btn_item_remove\" ><i class=\"fa fa-times\"></i></a> </span>\n" +
-                    "                                        <input type=\"text\" placeholder=\"选项\" class=\"form-control item_content\"   >\n" +
-                    "                                    </div>\n" +
-                    "                                </div>\n" +
-                    "\n" +
-                    "\n" +
-                    "\n" +
-                    "                                <div class=\"col-sm-2\"><input type=\"number\" placeholder=\"得分\" class=\"form-control item_level\" ></div>\n" +
-                    "\n" +
-                    "\n" +
-
-                document.getElementById("result_item").append(new_div)
-            })
-        })
-
-        $(function () {
-            $("#result_item").on('click','.btn_item_remove', function () {
-                $(this).parent().parent().parent().parent().remove()
+        $(document).ready(function () {
+            // Add slimscroll to element
+            $('.scroll_content').slimscroll({
+                height: '700px'
             })
 
         })
-        function get_param() {
-             var item_content = document.getElementsByClassName('item_content')
-             var item_level = document.getElementsByClassName('item_level')
-             var item_param =  new Array()
-             for(var i = 0; i< item_content.length; i++){
-                //var item_dict =  {content: item_content[i].value, score: item_score[i].value}
-                var item_dict = {}
-                item_dict["content"] = item_content[i].value
-                item_dict["level"] = item_level[i].value
-                item_param.splice(0,0,item_dict)
-             }
-             var Param = JSON.stringify(item_param)
+
+        function get_param(index) {
+
                 return{
-                        data: Param
+                        content: $("#item-content").val(),
+                        level: $("#item-level").val(),
+                        index:index
                 }
         }
         $(function () {
-            $("#btn_submit").click(function () {
-            var param = get_param()
-            var url = site_url+'developer/qes_body/result_edit/'+'${question_id}'+'/'
-            $.post(url,param,function (res) {
-                alert(res.message)
-                if(res.result){
+            $("#item_body").on("click",".btn-edit",function () {
+                $("#item-level").attr({"value": $(this).attr("level")})
+                var content = $(this).parent().parent().children("p").html()
+                //$("#item-content").remove()
+                $("#item-content").val(content)
+                $("#btn_submit").attr({"index": $(this).attr("index")})
+                $("#action_sign").html("编辑解析<a class=\"pull-right\" id=\"btn_test\" onClick=\"cancel_edit()\">取消编辑</a>")
+            })
+
+        })
+        $(function () {
+            $("#item_body").on("click",".btn-delete",function () {
+                var index=$(this).attr("index")
+                var url = site_url+'developer/qes_body/result_delete/'+'${question_id}'+'/'+index+'/'
+                $.get(url,function (res) {
+                    alert(res.message)
                     location.reload()
-                }
+                })
             })
         })
+        $(function () {
+            $("#btn_submit").click(function () {
+                var index = $(this).attr("index")
+                var param = get_param(index)
+                var url = site_url+'developer/qes_body/result_edit/'+'${question_id}'+'/'
+                $.post(url,param,function (res) {
+                    alert(res.message)
+                    location.reload()
+                })
+            })
         })
+
+
         $(function () {
             $("#btn_cancel").click(function () {
                 history.back(-1)
             })
-
         })
+
+        function cancel_edit() {
+             $("#item-level").attr({"value": ""})
+             $("#item-content").val("")
+             $("#btn_submit").attr({"index": "-1"})
+             $("#action_sign").html("新建解析")
+
+
+        }
 
     </script>
 </%block>

@@ -1,0 +1,11 @@
+ % for item in question.items:
+    <div class="col-sm-12">
+            <div class="col-sm-8">
+                <div class="input-group">
+                    <span class="input-group-btn" ><a class="btn  btn-danger btn_item_remove"  ><i class="fa fa-times"></i></a> </span>
+                    <input type="text" placeholder="选项" class="form-control item_content"  value="${item["content"]}"  >
+                </div>
+            </div>
+            <div class="col-sm-3"><input type="number" value="${item["score"]}" class="form-control item_score" ></div>
+    </div>
+ %endfor
