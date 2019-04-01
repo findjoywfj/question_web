@@ -8,51 +8,50 @@
         <div class="col-md-8">
             <div class="ibox">
                     <div class="ibox-content ">
-                            <div class="sk-spinner sk-spinner-double-bounce">
-                                    <div class="sk-double-bounce1"></div>
-                                    <div class="sk-double-bounce2"></div>
-                                </div>
-                    <div class="scroll_content">
-                        <h2>${qes_title}</h2>
-                        <div class="panel panel-default"id="question_body">
-                            % for question in questions:
-                            <div class="panel-body" id = "qes_item">
-                                <h3><script>document.write(i);i++</script>.${question.name}</h3>
-                                <div class="list-group">
-                                    % for item in question.items:
-                                    <div class="list-group-item" >
-                                          <label>
-                                                <input type="radio"  value=${item["score"]} name = ${question.name} class="qes">${item["content"]}
-                                          </label>
+                        <div class="sk-spinner sk-spinner-double-bounce">
+                                <div class="sk-double-bounce1"></div>
+                                <div class="sk-double-bounce2"></div>
+                        </div>
+                        <div class="scroll_content">
+                            <h2>${qes_title}</h2>
+                            <div class="panel panel-default"id="question_body">
+                                % for question in questions:
+                                <div class="panel-body" id = "qes_item">
+                                    <h3><script>document.write(i);i++</script>.${question.name}</h3>
+                                    <div class="list-group">
+                                        % for item in question.items:
+                                        <div class="list-group-item" >
+                                              <label>
+                                                    <input type="radio"  value=${item["score"]} name = ${question.name} class="qes">${item["content"]}
+                                              </label>
+                                        </div>
+                                        % endfor
                                     </div>
-                                    % endfor
+                                </div>
+                                % endfor
+                                <div align="center" id = "appendix_item">
+                                             <p  hidden="True" id = "appendix_p">
+                                            <script src="${STATIC_URL}js/jquery-3.1.1.min.js"></script>
+                                            <script>
+                                                var a = document.getElementById("question_body")
+                                                if (a.firstElementChild.id != "qes_item"){
+                                                    document.write("还没有题目哟")
+                                                    $("#appendix_p").show()
+                                                    var img_cry=document.createElement("img")
+                                                    img_cry.src = "${STATIC_URL}Img/cry.jpg"
+                                                    img_cry.class = "img-responsive"
+                                                    img_cry.alt = "Responsive image"
+                                                    $("#appendix_item").prepend(img_cry)
+                                                    }
+                                            </script></p>
                                 </div>
 
                             </div>
-                            % endfor
-
-                            <div align="center" id = "appendix_item">
-                                         <p  hidden="True" id = "appendix_p">
-                                        <script src="${STATIC_URL}js/jquery-3.1.1.min.js"></script>
-                                        <script>
-                                            var a = document.getElementById("question_body")
-                                            if (a.firstElementChild.id != "qes_item"){
-                                                document.write("还没有题目哟")
-                                                $("#appendix_p").show()
-                                                var img_cry=document.createElement("img")
-                                                img_cry.src = "${STATIC_URL}Img/cry.jpg"
-                                                img_cry.class = "img-responsive"
-                                                img_cry.alt = "Responsive image"
-                                                $("#appendix_item").prepend(img_cry)
-                                                }
-                                        </script></p>
-                                        <a id="btn-submit" num="${num}" type="button" class="btn btn-primary">完成</a>
-                                        <a type="button" class="btn btn-danger" id ="btn-back">返回</a>
+                            <div align="center" >
+                                      <a id="btn-submit" num="${num}" type="button" class="btn btn-primary   ">完成</a>
+                                      <a type="button" class="btn btn-danger " id ="btn-back">返回</a>
                             </div>
-
-                    </div>
-
-                </div>
+                        </div>
             </div>
         </div>
 

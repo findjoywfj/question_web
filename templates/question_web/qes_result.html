@@ -1,19 +1,43 @@
 <%inherit file="/base.html"/>
 <%block name = "content">
-    <h1>${title}</h1>
-    <h2>测试结果</h2>
-    <p>${result}</p>
-    <div align="center">
-        <button type="button" class="btn btn-info" id = "back" >再次测试</button>
+
+
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                     <h2>${title}</h2>
+                    <small>测试结果</small>
+                </div>
+                <div class="ibox-content">
+                    <div class="scroll_content">
+                        <p>${result}</p>
+                    </div>
+                    <div align="center">
+                        <button type="button" class="btn btn-info" id = "back" >再次测试</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
     </div>
+
 </%block>
 <%block name = "js">
     <script src="${STATIC_URL}js/jquery-3.1.1.min.js"></script>
     <script src="${STATIC_URL}js/bootstrap.min.js"></script>
+    <script src="${STATIC_URL}js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
     <script>
+        $(document).ready(function () {
+            // Add slimscroll to element
+            $('.scroll_content').slimscroll({
+                height: '350px'
+            })
+
+        })
         $("#back").click(function () {
             var url = "/customer/qes_body/"
-            url +="${query_id}"
+            url +="${query_id}/customer/"
             window.location=url
         })
     </script>
