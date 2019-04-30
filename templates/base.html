@@ -17,6 +17,7 @@
     <script type="text/javascript">
 
         var site_url = "/";            // app的url前缀,在ajax调用的时候，应该加上该前
+
     </script>
     <%block name = "css">
     </%block>
@@ -37,10 +38,17 @@
                     </div>
                     <ul class = "nav navbar-top-links  navbar-right ">
                         <li>
-                            <span class ="m-r-sm text-muted welcome-message">欢迎来到XIN</span>
+                            <a class="m-r-sm text-muted" href= "/customer/record/">测试记录</a>
                         </li>
                         <li>
-                            <a href = "/">
+                            <a class="m-r-sm text-muted btn" id="history_back" >返回</a>
+                        </li>
+                        <li>
+                            <span class ="m-r-sm text-muted welcome-message">欢迎来到XIN</span>
+                        </li>
+
+                        <li>
+                            <a href = "/login_out/">
                                 <i class="fa fa-sign-out"></i> 退出
                             </a>
                         </li>
@@ -53,8 +61,14 @@
                     </%block>
                </div>
             </div>
+
     <%block name = "js">
     </%block>
+    <script>
+            $("#history_back").click(function () {
+                history.back()
+            })
+    </script>
 </body>
 
 </html>

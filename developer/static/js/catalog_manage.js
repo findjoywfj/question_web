@@ -13,7 +13,7 @@ config = {
                 shrinkToFit: true,
                 rowNum: 20,
                 rowList: [10, 20, 30],
-                colNames: ['编号', '名称', '数量','logo','预览', '编辑'],
+                colNames: ['编号', '名称', '数量','logo','预览', '编辑','用户结果'],
                 colModel: [
                     { name: 'id', index: 'id', editable: false, width: 60, search: true , searchoptions:{sopt:['eq','ne']},},
                     { name: 'title', index: 'title', editable: true, width: 100, search:true, searchoptions:{sopt:['eq','ne']}},
@@ -35,6 +35,13 @@ config = {
 
                         },
                     },
+                    {
+                        name: 'id', index: 'id', editable: false, width: 90,search: false,
+                        formatter: function (cellvalue, options, rowObject) {
+                            return "<a class='btn btn-default btn-xs' href='record/" + rowObject.id + "' ><i class='fa fa-user'></i> 用户结果</a>";
+
+                        },
+                    }
 
                 ],
                 pager: "#pager_list_2",

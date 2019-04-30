@@ -6,6 +6,7 @@ from question_web.mymako import render_mako_context
 from login.models import User,User_mongo
 from django.http import JsonResponse
 from django.shortcuts import HttpResponse
+from django.http import HttpResponseRedirect
 from mongoengine.errors import DoesNotExist
 
 from django.core.exceptions import ObjectDoesNotExist
@@ -20,6 +21,8 @@ def login_to(request):
         password = request.POST["password"]
         role = User_mongo.objects.get(name=name).role
         key_data = User_mongo.objects.get(name=name).password
+        request.session["name"] = name
+        request.session["role"] = role
         if key_data == password:
             if role == 0:
                 return JsonResponse({
@@ -72,7 +75,13 @@ def register_action(request):
             'message': '注册失败'
         })
 
-
+def login_out(request):
+    try:
+        del request.session["name"]
+        del request.session["role"]
+        return HttpResponseRedirect("/")
+    except Exception as e:
+        return HttpResponseRedirect("/")
 def test(request):
         # name = request.POST["name"]
         # password = request.POST["password"]

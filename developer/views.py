@@ -7,7 +7,8 @@ from django.http import JsonResponse
 from bson import ObjectId
 import json
 from django.http import HttpResponse
-
+from customer.models import Record
+from mongoengine.errors import DoesNotExist
 
 import random
 # Create your views here.
@@ -18,7 +19,7 @@ home为管理者登陆页面
 
 def home(request):
     question_query = Questions_mongo.objects.all()
-    return render_mako_context(request, 'question_web/admin_qes_body.html',{
+    return render_mako_context(request, 'question_web/admin_qes_body.html', {
         'config': 'catalog_manage.js'
     })
     # return render_mako_context(request, 'question_web/admin_qes_body.html', {
@@ -244,6 +245,26 @@ def admin_result_delete(request, query_id, index):
             'result': False,
             'message': u"删除失败"
         })
+def admin_record_show(request,query_id):
+    request.session["query_id"] = query_id
+    return render_mako_context(request, 'question_web/record.html', {
+        'config': 'admin_record_manage.js',
+    })
+def admin_record_get(request):
+    data = []
+    query_id = request.session["query_id"]
+    try:
+        records = Record.objects.all()
+        for record in records:
+            for item in record.desprition:
+                if item["questions_id"]==query_id:
+                    data.append({"user": record.belong, "questions_id":item["questions_id"], "questions_name": item["questions_name"], "score": item["score"], "content": item["content"],
+                       "found_time": item["found_time"].strftime('%Y-%m-%d %H:%M:%S')})
+        return HttpResponse(json.dumps(data))
+    except DoesNotExist:
+        return HttpResponse(json.dumps(data))
+    except Exception as e:
+        return HttpResponse(json.dumps(data))
 
 
 

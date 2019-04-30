@@ -3,8 +3,12 @@ from __future__ import unicode_literals
 from developer.models import Question,Query_qes,ResultSimple,Questions_mongo,Question_mongo
 from question_web.mymako import render_mako_context
 from django.http import JsonResponse
+from mongoengine.errors import DoesNotExist
+from customer.models import Record
 from django.shortcuts import render
-
+import datetime
+import json
+from django.http import HttpResponse
 # Create your views here.
 
 def home(request):
@@ -40,6 +44,26 @@ def qes_result(request,query_id, score):
             if score_temp <= int(item["level"]):
                 content = item["content"]
                 break
+        #将结果存入数据库
+        username = request.session["name"]
+        datenow = datetime.datetime.now()
+        try:
+            record = Record.objects.get(belong=username)
+            record.desprition.append({"found_time": datenow, "score": score_temp,
+                                      "content": content, "questions_name": questions.title, "questions_id": query_id})
+            record.save()
+        except DoesNotExist:
+            record = Record(belong=username)
+            record.desprition.append({"found_time": datenow, "score": score_temp,
+                                      "content": content,"questions_name": questions.title, "questions_id": query_id})
+            record.save()
+        except Exception as e:
+            return JsonResponse({
+                'result': False,
+                'message': '存储失败'
+            })
+
+
 
         return render_mako_context(request, 'question_web/qes_result.html',{
                 'title': questions.title,
@@ -55,3 +79,22 @@ def qes_result(request,query_id, score):
             'result': False,
             'message': u'评分失败'
         })
+def record_show(request):
+    return render_mako_context(request, 'question_web/record.html', {
+        'config': 'record_manage.js',
+    })
+def api_record_get(request):
+    user_name = request.session["name"]
+    a = []
+    try:
+       user = Record.objects.get(belong=user_name)
+       for item in user.desprition:
+           data = {"questions_name": item["questions_name"], "score": item["score"], "content": item["content"],
+                   "found_time": item["found_time"].strftime('%Y-%m-%d %H:%M:%S')}
+           a.append(data)
+       return HttpResponse(json.dumps(a))
+    except DoesNotExist:
+        return HttpResponse(json.dumps(a))
+    except Exception as e:
+        return HttpResponse(json.dumps(a))
+

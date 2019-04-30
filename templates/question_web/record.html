@@ -1,0 +1,44 @@
+<%inherit file="/base.html"/>
+<%block name="content">
+    <div class="row">
+            <div class="col-lg-10">
+                <div class="ibox ">
+                    <div class="ibox-title">
+                        <h5 id="title">
+                            </h5>
+                    </div>
+                    <div class="ibox-content">
+
+                        <div class="jqGrid_wrapper  ">
+                                <table id="table_list_2"></table>
+                                <div id="pager_list_2"></div>
+                        </div>
+
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</%block>
+<%block name="js">
+
+    <script src="${STATIC_URL}js/jquery-3.1.1.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdn.bootcss.com/datatables/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script src="/static/js/plugins/jqGrid/i18n/grid.locale-cn.js"></script>
+    <script src="/static/js/plugins/jqGrid/jquery.jqGrid.min.js"></script>
+    <script src="/static/js/plugins/jquery-ui/jquery-ui.min.js"></script>
+    <script src="/static/js/${config}"></script>
+    <script>
+        $(document).ready(
+            config.init()
+        )
+    </script>
+</%block>
+
+<%block name="css">
+    <link href="https://cdn.bootcss.com/jqueryui/1.12.1/jquery-ui.min.css" rel="stylesheet">
+    <link href="/static/css/plugins/jQueryUI/jquery-ui-1.10.4.custom.min.css" rel="stylesheet">
+    <link href="/static/css/plugins/jqGrid/ui.jqgrid.css" rel="stylesheet">
+    <link href="/static/css/style.css" rel="stylesheet">
+</%block>
