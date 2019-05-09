@@ -71,8 +71,16 @@
 <%block name = "js">
 
          <script src="${STATIC_URL}js/bootstrap.min.js"></script>
+         <script src="${STATIC_URL}js/jquery-3.1.1.min.js"></script>
+         <script src="${STATIC_URL}js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
         <script>
+            $(document).ready(function () {
+            // Add slimscroll to element
+                $('.scroll_content').slimscroll({
+                    height: '70vh'
+                })
 
+            })
             $(function () {
                 $("#btn-back").click(function () {
                     var user_type = "${user_type}"
@@ -90,11 +98,11 @@
 
                 $("#btn-submit").on('click', function (e) {
                     var num = $(this).attr('num')
-                    num = num*2
                     var radio =  document.getElementsByClassName("qes")
                     var result = 0
                     var count = 0
-                    for ( var i = 0; i < num; i++) {
+                    var length = radio.length
+                    for ( var i = 0; i < length; i++) {
                         var a = i.toString()
 
                            if(radio[i].checked){
@@ -102,7 +110,7 @@
                                 count = count+1
                            }
                     }
-                    if(count<(num/2))
+                    if(count<(num))
                         alert("未完成题目")
                     else {
                         var url = 'result/' + result

@@ -14,7 +14,7 @@ from django.http import HttpResponse
 def home(request):
     questions = Questions_mongo.objects.all()
     return render_mako_context(request, '/question_web/home.html',
-                               {'questions': questions})
+                             {'questions': questions})
 
 
 def qes_show(request, query_id, user_type):

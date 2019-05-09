@@ -8,11 +8,11 @@ config = {
             $("#table_list_2").jqGrid({
                 data: data,
                 datatype: "local",
-                height: 450,
+                height: 300,
                 autowidth: true,
                 shrinkToFit: true,
                 rowNum: 20,
-                rowList: [10, 20, 30],
+                rowList: [5, 10, 20],
                 colNames: ['题库名称', '测试得分', '测试结果','测试时间','详情'],
                 colModel: [
                     { name: 'questions_name', index: 'questions_name', editable: false, width: 60, search: true , searchoptions:{sopt:['eq','ne']},},

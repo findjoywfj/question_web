@@ -19,6 +19,7 @@ home为管理者登陆页面
 
 def home(request):
     question_query = Questions_mongo.objects.all()
+    #return render_mako_context(request, 'question_web/test.html')
     return render_mako_context(request, 'question_web/admin_qes_body.html', {
         'config': 'catalog_manage.js'
     })
@@ -58,6 +59,7 @@ def api_catalog_action(request):
         elif oper == "add":
              questions = Questions_mongo()
              questions.title=request.POST["title"]
+             questions.logo=request.POST["logo"]
              questions.result=Result()
              questions.save()
              mes = "添加成功"

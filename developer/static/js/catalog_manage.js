@@ -8,7 +8,7 @@ config = {
             $("#table_list_2").jqGrid({
                 data: data,
                 datatype: "local",
-                height: 450,
+                height: 300,
                 autowidth: true,
                 shrinkToFit: true,
                 rowNum: 20,
